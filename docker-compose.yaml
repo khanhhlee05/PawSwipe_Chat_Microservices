@@ -7,12 +7,12 @@ services:
     ports:
       - "5001:5001"
     environment:
-      MONGODB_URI: "."
-      PORT: "."
-      JWT_SECRET: "."
-      CLOUDINARY_CLOUD_NAME: "."
-      COULDINARY_API_KEY: "."
-      CLOUDINARY_API_SECRET: "."
+      MONGODB_URI: "mongodb+srv://khanhleduy2304:3SANXPOD5y98d1n4@cluster0.4czwc.mongodb.net/chat_db?retryWrites=true&w=majority&appName=Cluster0"
+      PORT: "5001"
+      JWT_SECRET: "my_ultimate_secret"
+      CLOUDINARY_CLOUD_NAME: "dmlwffc4c"
+      COULDINARY_API_KEY: "222697981912678"
+      CLOUDINARY_API_SECRET: "QjyQkDd5HSgEgPCZjul8W3SE5AM"
   
   frontend:
     build:

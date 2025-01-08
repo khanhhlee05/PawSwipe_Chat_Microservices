@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+docker-compose.yaml
+docker-compose.yml

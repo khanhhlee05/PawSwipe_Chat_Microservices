@@ -11,6 +11,7 @@ const SignUpPage = () => {
     fullName: "",
     email: "",
     password: "",
+    role: "",
   })
 
   const { signup, isSigningUp } = useAuthStore()
@@ -18,8 +19,9 @@ const SignUpPage = () => {
   const validateForm = () => { 
     if (!formData.fullName.trim()) return toast.error("Full name is required")
     if (!formData.email.trim()) return toast.error("Email is required")
-    if (!formData.password.trim()) return toast.error("Password is require")
+    if (!formData.password.trim()) return toast.error("Password is required")
     if (formData.password.trim().length < 6) return toast.error("Password is too short")
+    if (!formData.role) return toast.error("Please select a role")
 
     return true 
   }
@@ -115,6 +117,46 @@ const SignUpPage = () => {
                 </button>
               </div>
             </div>
+            
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">I am a</span>
+              </label>
+              <div className="grid grid-cols-2 gap-4">
+                <label className={`flex items-center gap-2 p-4 border rounded-lg cursor-pointer transition-colors ${
+                  formData.role === 'user' ? 'border-primary bg-primary/10' : 'border-base-300'
+                  }`}>
+                  <input
+                    type="radio"
+                    name="role"
+                    className="radio radio-primary"
+                    checked={formData.role === 'user'}
+                    onChange={() => setFormData({ ...formData, role: 'user' })}
+                  />
+                  <div>
+                    <p className="font-medium">User</p>
+                    <p className="text-sm text-base-content/60">Looking to adopt</p>
+                  </div>
+                </label>
+
+                <label className={`flex items-center gap-2 p-4 border rounded-lg cursor-pointer transition-colors ${
+                  formData.role === 'shelter' ? 'border-primary bg-primary/10' : 'border-base-300'
+                }`}>
+                  <input
+                    type="radio"
+                    name="role"
+                    className="radio radio-primary"
+                    checked={formData.role === 'shelter'}
+                    onChange={() => setFormData({ ...formData, role: 'shelter' })}
+                  />
+                  <div>
+                    <p className="font-medium">Shelter</p>
+                    <p className="text-sm text-base-content/60">Offering pets</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+            
             
             <button type = 'submit' className='btn btn-primary w-full' disabled={isSigningUp}>
                   {
