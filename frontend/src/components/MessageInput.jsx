@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
-import { Image, Send } from 'lucide-react'
+import { Image, Send, Bot } from 'lucide-react'
 import { X } from 'lucide-react'
 
 const MessageInput = () => {
@@ -9,7 +9,7 @@ const MessageInput = () => {
     const [imagePreview, setImagePreview] = useState(null)
     const fileInputRef = useRef(null)
 
-    const { sendMessage } = useChatStore()
+    const { sendMessage, sendAiMessage, isAiMessageLoading } = useChatStore()
     const handleImageChange = (e) => {
         const file = e.target.files[0]
         if (!file.type.startsWith("image/")) {
@@ -46,6 +46,17 @@ const MessageInput = () => {
             console.error("Failed to send message:", error);
         }
     }
+
+    const handleAiMessage = async (e) => {
+        e.preventDefault()
+        if (!text.trim()) return;
+        try {
+            await sendAiMessage({text: text.trim()})
+            setText("")
+        } catch (error) {
+            console.error("Failed to send AI message:", error)
+        }
+    }   
 
 
     return (
@@ -97,10 +108,19 @@ const MessageInput = () => {
 
                     <button
                         type="submit"
-                        className="btn btn-sm btn-circle"
+                        className="sm:flex btn btn-circle"
                         disabled={!text.trim() && !imagePreview}
                     >
                         <Send size={22} />
+                    </button>
+                    
+                    <button
+                        type="button"
+                        className="sm:flex btn btn-circle"
+                        onClick= {handleAiMessage}
+                        disabled={!text.trim() || isAiMessageLoading}
+                    >
+                        <Bot size={22} />
                     </button>
 
                 </div>

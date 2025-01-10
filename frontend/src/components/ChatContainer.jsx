@@ -5,6 +5,7 @@ import MessageInput from './MessageInput.jsx'
 import MessageSkeleton from './skeletons/MessageSkeleton.jsx'
 import { useAuthStore } from '../store/useAuthStore.js'
 import { formatMessageTime } from '../lib/utils.js'
+import ReactMarkdown from 'react-markdown'
 
 
 
@@ -54,12 +55,12 @@ const ChatContainer = () => {
           messages.map((message) => (
             <div
               key={message._id}
-              className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
+              className={`chat ${message.isAi ? "chat-start" : message.senderId === authUser._id ? "chat-end" : "chat-start"}`}
               ref={messageEndRef}>
               <div className='chat-image avatar'>
                 <div className="size-10 rounded-full border">
                   <img
-                    src={message.senderId === authUser._id ? authUser.profilePic || "/avatar.png" :
+                    src={message.isAi ? "/dog.png" : message.senderId === authUser._id ? authUser.profilePic || "/avatar.png" :
                       selectedUser.profilePic || "/avatar.png"}
 
                     alt="Profile Pic" />
@@ -81,7 +82,13 @@ const ChatContainer = () => {
                   )
                 }
 
-                {message.text && <p>{message.text}</p>}
+                {message.text && (
+                  message.isAi ? (
+                    <ReactMarkdown>{message.text}</ReactMarkdown>
+                  ) : (
+                    <p>{message.text}</p>
+                  )
+                )}
 
               </div> 
             </div>

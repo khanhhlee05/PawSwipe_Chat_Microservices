@@ -9,6 +9,7 @@ export const useChatStore = create((set, get) => ({
     selectedUser: null,
     isUsersLoading: false,
     isMessagesLoading: false,
+    isAiMessageLoading: false,
 
     getUsers: async () => {
         set({ isUsersLoading: true });
@@ -45,6 +46,20 @@ export const useChatStore = create((set, get) => ({
             toast.error(error.response.data.message)
         }
     },
+
+    sendAiMessage: async (messageData) => {
+        set({isAiMessageLoading: true})
+        const {selectedUser, messages} = get()
+        try {
+            const res = await axiosInstance.post(`/message/send-ai/${selectedUser._id}`, messageData)
+            const updatedMessage = [...messages, ...res.data]
+            set({messages: updatedMessage})
+        } catch (error) {
+            toast.error(error.response.data.message)
+        } finally {
+            set({isAiMessageLoading: false})
+        }
+    },  
 
 
     //to do optimize later 

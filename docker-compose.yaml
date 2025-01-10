@@ -13,6 +13,7 @@ services:
       CLOUDINARY_CLOUD_NAME: "dmlwffc4c"
       COULDINARY_API_KEY: "222697981912678"
       CLOUDINARY_API_SECRET: "QjyQkDd5HSgEgPCZjul8W3SE5AM"
+      CEREBRAS_API: csk-8fh8vkr8nde8cxvv96n9p4x3nvcmrpwxk64vkr6pv3cvvkde
   
   frontend:
     build:
