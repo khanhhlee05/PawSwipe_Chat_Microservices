@@ -2,19 +2,15 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile  
+      dockerfile: Dockerfile
     container_name: pawswipe_backend
     ports:
       - "5001:5001"
+    env_file:
+      - ./backend/.env
     environment:
-      MONGODB_URI: "mongodb+srv://khanhleduy2304:3SANXPOD5y98d1n4@cluster0.4czwc.mongodb.net/chat_db?retryWrites=true&w=majority&appName=Cluster0"
-      PORT: "5001"
-      JWT_SECRET: "my_ultimate_secret"
-      CLOUDINARY_CLOUD_NAME: "dmlwffc4c"
-      COULDINARY_API_KEY: "222697981912678"
-      CLOUDINARY_API_SECRET: "QjyQkDd5HSgEgPCZjul8W3SE5AM"
-      CEREBRAS_API: csk-8fh8vkr8nde8cxvv96n9p4x3nvcmrpwxk64vkr6pv3cvvkde
-  
+      NODE_ENV: production
+
   frontend:
     build:
       context: ./frontend

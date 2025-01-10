@@ -72,7 +72,7 @@ export const sendMessage = async (req, res) => {
         //TODO: real time functionalities with socket io
         const receiverSocketId = getReceiverSocketId(receiverId)
         if (receiverSocketId) {
-            io.to(receiverSocketId).emit("newMessage", newMessage)
+            io.to(receiverSocketId).emit("newMessage", [newMessage])
         }
 
 
@@ -127,7 +127,7 @@ export const sendAiMessage = async (req, res) => {
 
         const receiverSocketId = getReceiverSocketId(receiverId)
         if (receiverSocketId) {
-            io.to(receiverSocketId).emit("newMessage", newMessage)
+            io.to(receiverSocketId).emit("newMessage", [userMessage, newMessage])
         }
 
         return res.status(200).json([userMessage, newMessage])

@@ -7,9 +7,15 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173"],
-        credentials: true
-    }
+        origin: process.env.NODE_ENV === "production" 
+            ? ["http://localhost", "http://localhost:80"] 
+            : "http://localhost:5173",
+        credentials: true,
+        methods: ["GET", "POST"]
+    },
+    transports: ['websocket', 'polling'],  // Allow both with websocket preferred
+    pingTimeout: 60000,
+    pingInterval: 25000
 })
 
 export function getReceiverSocketId(userId) {

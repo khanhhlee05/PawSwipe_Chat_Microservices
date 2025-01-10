@@ -25,5 +25,3 @@ dist-ssr
 
 .env
 
-docker-compose.yaml
-docker-compose.yml

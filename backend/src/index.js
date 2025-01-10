@@ -15,8 +15,11 @@ const __dirname = path.resolve()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
+    origin: process.env.NODE_ENV === "production"
+        ? ["http://localhost", "http://localhost:80"]
+        : "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 }))
 
 
