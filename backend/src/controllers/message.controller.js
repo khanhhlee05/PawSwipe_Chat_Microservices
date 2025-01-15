@@ -97,14 +97,14 @@ export const sendAiMessage = async (req, res) => {
         const { id: receiverId } = req.params
 
         const openai = new OpenAI({
-            baseURL: "https://api.cerebras.ai/v1",
-            apiKey: process.env.CEREBRAS_API
+            baseURL: "https://openrouter.ai/api/v1",
+            apiKey: process.env.OPEN_ROUTER_API_KEY
         })
 
         const completion = await openai.chat.completions.create({
             messages: [{ role: 'system', content: systemPrompt },
             { role: 'user', content: text }],
-            model: "llama3.1-70b"
+            model: "meta-llama/llama-3-8b-instruct:extended"
         })
 
         const userMessage = new Message({
