@@ -101,7 +101,7 @@ const LoginPage = () => {
 
           <div className = "text-center">
             <p className = "text-base-content/60">
-                  Doesn't have an account? {" "}
+                  Not a member? {" "}
                   <Link to = "/signup" className="link link-primary">
                     Sign up 
                   </Link>
