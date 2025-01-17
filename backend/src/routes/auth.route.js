@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
 router.post("/signup", signup )
 
-router.post("/logins", login)
+router.post("/login", login)
 
 router.post("/logout", logout)
 
