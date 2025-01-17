@@ -26,10 +26,6 @@ app.use(cors({
 app.use("/api/auth", authRoutes)
 app.use("/api/message", messageRoutes)
 
-app.get("/", (req, res) => {
-    res.send("Backend is working!");
-});
-
 if(process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
